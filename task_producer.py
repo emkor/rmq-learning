@@ -33,7 +33,7 @@ if __name__ == '__main__':
             task = Task.new(uniform(0., 1.))
             rmq_chan.basic_publish(exchange=rmq_exchange, routing_key=rmq_queue, body=task.to_json())
             task_cnt += 1
-            sleep(uniform(0., 1.) / 2.5)
+            sleep(uniform(0., 0.1))
         except KeyboardInterrupt:
             logging.warning("Keyboard interrupt, exiting!")
             break
