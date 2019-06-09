@@ -46,7 +46,7 @@ if __name__ == '__main__':
         f"Sending messages to {rmq_host} to exchange {rmq_exchange} and queue {rmq_queue} with interval of {produce_s}s...")
     msg_count = 0
     while True:
-        if msg_count % 10:
+        if msg_count % 10 == 0:
             logging.info(f"Already sent {msg_count} messages...")
         try:
             epoch, microseconds = dt_to_timestamp(datetime.utcnow())
