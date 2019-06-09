@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import socket
+import time
 import traceback
 from datetime import datetime, timedelta
 from random import uniform
@@ -13,7 +14,8 @@ import pika
 
 
 def _setup_logger() -> None:
-    logging.basicConfig(format='%(levelname)s | %(asctime)s UTC | %(message)s')
+    logging.basicConfig(format='%(levelname)s | %(asctime)s UTC | %(message)s', level=logging.INFO)
+    logging.Formatter.converter = time.gmtime
 
 
 def _random_time(base_s: float) -> float:
