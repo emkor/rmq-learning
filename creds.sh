@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-RMQ_HOST="192.168.193.1"
-RMQ_USER="rmq_user"
-RMQ_PASS="rmq_pass"
-RMQ_EXCHANGE=""
-RMQ_QUEUE="tasks"
-PRODUCE_MS=2000
-CONSUME_MS=5000
+export RMQ_HOST="192.168.193.1"
+export RMQ_USER="rmq_user"
+export RMQ_PASS="rmq_pass"
+export RMQ_EXCHANGE=""
+export RMQ_QUEUE="tasks"
+export PRODUCE_MS=2000
+export CONSUME_MS=5000
