@@ -1,6 +1,7 @@
 import calendar
 import json
 import logging
+import os
 import time
 from _socket import gethostname
 from copy import copy
@@ -11,7 +12,7 @@ from uuid import uuid4
 
 
 def setup_logger() -> None:
-    logging.basicConfig(format='%(levelname)s | %(asctime)s UTC | %(message)s', level=logging.INFO)
+    logging.basicConfig(format="%(asctime)s UTC | %(levelname)s | %(process)d | %(message)s", level=logging.INFO)
     logging.Formatter.converter = time.gmtime
 
 
@@ -23,6 +24,10 @@ def timestamp_to_dt(timestamp: int, microseconds: int) -> datetime:
     return datetime.utcfromtimestamp(timestamp) + timedelta(microseconds=microseconds)
 
 
+def curr_proc_host() -> str:
+    return str(os.getpid()) + "@" + gethostname()
+
+
 class Task:
     def __init__(self, uuid: str, sender: str, sent: datetime, param: float) -> None:
         self.uuid = uuid
@@ -32,7 +37,7 @@ class Task:
 
     @classmethod
     def new(cls, param: float) -> 'Task':
-        return Task(uuid=str(uuid4()), sender=gethostname(), sent=datetime.utcnow(), param=param)
+        return Task(uuid=str(uuid4()), sender=curr_proc_host(), sent=datetime.utcnow(), param=param)
 
     def to_json(self) -> str:
         as_dict = copy(self.__dict__)
@@ -106,4 +111,4 @@ def do(task: Task) -> Optional[DoneTask]:
         ops += 1
     time.sleep(uniform(0., 0.1))  # simulate I/O
     return DoneTask(uuid=task.uuid, sender=task.sender, sent=task.sent, param=task.param, got=got,
-                    worker=gethostname(), done=datetime.utcnow(), result=result)
+                    worker=curr_proc_host(), done=datetime.utcnow(), result=result)
