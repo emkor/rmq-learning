@@ -54,7 +54,7 @@ if __name__ == '__main__':
             logging.info(f"Already sent {msg_count} messages...")
         try:
             epoch, microseconds = dt_to_timestamp(datetime.utcnow())
-            msg = {"id": uuid4(), "sender": host_name,
+            msg = {"id": str(uuid4()), "sender": host_name,
                    "sent_epoch": epoch, "sent_microseconds": microseconds, "task_time_s": _random_time(consume_s)}
             channel.basic_publish(exchange=rmq_exchange, routing_key=rmq_queue, body=json.dumps(msg))
             msg_count += 1
