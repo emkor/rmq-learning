@@ -61,4 +61,4 @@ if __name__ == '__main__':
     finally:
         if connection:
             connection.close()
-        logging.info(f"Consumed {msg_count} messages to {rmq_host} to exchange {rmq_exchange} and queue {rmq_queue}")
+    logging.info(f"Consumed {msg_count} messages to {rmq_host} to exchange {rmq_exchange} and queue {rmq_queue}")
