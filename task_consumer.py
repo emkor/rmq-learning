@@ -8,7 +8,7 @@ from datetime import datetime
 
 import pika
 
-from .common import setup_logger, Task, do
+from common import setup_logger, Task, do
 
 
 def _msg_handle(ch, method, properties, body):

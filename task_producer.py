@@ -9,7 +9,7 @@ from time import sleep
 
 import pika
 
-from .common import setup_logger, Task
+from common import setup_logger, Task
 
 if __name__ == '__main__':
     setup_logger()
