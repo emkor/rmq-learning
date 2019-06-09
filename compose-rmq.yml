@@ -1,0 +1,21 @@
+version: '3'
+
+networks:
+  default:
+
+services:
+  rmq:
+    networks:
+      default:
+        aliases:
+          - rmq.lan
+    image: "rabbitmq:3.7-management"
+    hostname: "rmq"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "secret cookie here"
+      RABBITMQ_DEFAULT_USER: "rmq_user"
+      RABBITMQ_DEFAULT_PASS: "rmq_pass"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "5672:5672"
+      - "80:15672"
