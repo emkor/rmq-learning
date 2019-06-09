@@ -29,10 +29,6 @@ def dt_to_timestamp(dt: datetime) -> Tuple[int, int]:
     return calendar.timegm(dt.utctimetuple()), dt.microsecond
 
 
-def timestamp_to_dt(timestamp: int, microseconds: int) -> datetime:
-    return datetime.utcfromtimestamp(timestamp) + timedelta(microseconds)
-
-
 if __name__ == '__main__':
     _setup_logger()
     host_name = socket.gethostname()

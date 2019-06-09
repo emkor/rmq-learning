@@ -23,7 +23,7 @@ def _random_time(base_s: float) -> float:
 
 
 def timestamp_to_dt(timestamp: int, microseconds: int) -> datetime:
-    return datetime.utcfromtimestamp(timestamp) + timedelta(microseconds)
+    return datetime.utcfromtimestamp(timestamp) + timedelta(microseconds=microseconds)
 
 
 def _msg_handle(ch, method, properties, body):
@@ -32,7 +32,7 @@ def _msg_handle(ch, method, properties, body):
     msg_id, sender, task_time_s = msg["id"], msg["sender"], msg["task_time_s"]
     sent_time = timestamp_to_dt(msg["sent_epoch"], msg["sent_microseconds"])
     took_s = (curr_time - sent_time).total_seconds()
-    logging.info(f"{host_name} got message {msg_id} from queue {ch} sent by {sender} in {took_s}s!")
+    logging.info(f"{host_name} got message {msg_id} sent by {sender} in {took_s:.3f}s!")
     sleep(_random_time(task_time_s))
 
 
